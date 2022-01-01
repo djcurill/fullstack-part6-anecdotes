@@ -1,5 +1,6 @@
-export const displayNotification = (msg) => {
-  return { type: 'notification/display', payload: msg };
+export const displayNotification = (msg, sec) => (dispatch) => {
+  dispatch({ type: 'notification/display', payload: msg });
+  setTimeout(() => dispatch(removeNotification()), sec * 1000);
 };
 
 export const removeNotification = () => {

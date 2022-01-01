@@ -1,32 +1,40 @@
+import anecdoteService from '../services/anecdotes';
+
 const compareByVotes = (left, right) => {
   return left.votes > right.votes ? -1 : 1;
 };
 
-export const addVote = (id) => {
-  return {
+export const addVote = (anecdote) => async (dispatch) => {
+  const updatedAnecdote = await anecdoteService.updateAnecdote({
+    ...anecdote,
+    votes: anecdote.votes + 1,
+  });
+  dispatch({
     type: 'anecdotes/votes',
-    payload: id,
-  };
+    payload: updatedAnecdote,
+  });
 };
 
-export const createAnecdote = (anecdote) => {
-  return { type: 'anecdotes/create', payload: anecdote };
+export const createAnecdote = (content) => async (dispatch) => {
+  const newAnecdote = await anecdoteService.createNew(content);
+  dispatch({ type: 'anecdotes/create', payload: newAnecdote });
 };
 
 export const sortByVotes = () => {
   return { type: 'anecdotes/sort' };
 };
 
-export const initializeAnecdotes = (anecdotes) => {
-  return { type: 'anecdotes/init', payload: anecdotes };
+export const initializeAnecdotes = () => async (dispatch) => {
+  const anecdotes = await anecdoteService.getAll();
+  dispatch({ type: 'anecdotes/init', payload: anecdotes });
 };
 
 export const anecdoteReducer = (state = [], action) => {
   switch (action.type) {
     case 'anecdotes/votes': {
       return state.map((anecdote) => {
-        if (anecdote.id !== action.payload) return anecdote;
-        return { ...anecdote, votes: anecdote.votes + 1 };
+        if (anecdote.id !== action.payload.id) return anecdote;
+        return { ...action.payload };
       });
     }
     case 'anecdotes/create': {
