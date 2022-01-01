@@ -3,7 +3,7 @@ import {
   addVote,
   createAnecdote,
   sortByVotes,
-} from './anecdoteReducer';
+} from './anecdoteSlice';
 
 describe('anecdote reducer', () => {
   const initialState = [
