@@ -3,7 +3,7 @@
     {
       "content": "If it hurts, do it more often",
       "id": "47145",
-      "votes": 4
+      "votes": 6
     },
     {
       "content": "Adding manpower to a late software project makes it later!",
@@ -28,17 +28,22 @@
     {
       "content": "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.",
       "id": "98312",
-      "votes": 0
+      "votes": 2
     },
     {
       "content": "Testing new anecdote",
-      "votes": 0,
+      "votes": 1,
       "id": "CtCa1bg"
     },
     {
       "content": "A new anecdote",
-      "votes": 0,
+      "votes": 1,
       "id": "hKhTDa7"
+    },
+    {
+      "content": "The connect API is weird",
+      "votes": 5,
+      "id": "fR_Pa1W"
     }
   ]
 }

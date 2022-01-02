@@ -1,17 +1,16 @@
 import { React, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { filterAnecdote } from '../reducers/filterSlice';
 import './Filter.css';
 
-const Filter = () => {
-  const dispatch = useDispatch();
+const Filter = (props) => {
+  //const dispatch = useDispatch();
   const [search, setSearch] = useState('');
 
   const handleChange = (e) => {
-    console.log('here');
     let text = e.target.value;
     setSearch(text);
-    dispatch(filterAnecdote(text));
+    props.filterAnecdote(text);
   };
 
   return (
@@ -27,4 +26,10 @@ const Filter = () => {
   );
 };
 
-export default Filter;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    filterAnecdote: (text) => dispatch(filterAnecdote(text)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Filter);

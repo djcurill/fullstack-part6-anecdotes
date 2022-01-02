@@ -1,6 +1,9 @@
+let timeoutId = null;
+
 export const displayNotification = (msg, sec) => (dispatch) => {
+  clearInterval(timeoutId);
   dispatch({ type: 'notification/display', payload: msg });
-  setTimeout(() => dispatch(removeNotification()), sec * 1000);
+  timeoutId = setTimeout(() => dispatch(removeNotification()), sec * 1000);
 };
 
 export const removeNotification = () => {
@@ -13,6 +16,7 @@ export const notificationReducer = (state = '', action) => {
       return action.payload;
     }
     case 'notification/remove': {
+      timeoutId = null;
       return '';
     }
     default: {
